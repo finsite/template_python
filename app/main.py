@@ -1,3 +1,6 @@
+"""Module providing a function printing python version."""
+
+
 def main() -> None:
     """
     Main function that serves as the entry point of the script.
