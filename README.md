@@ -33,11 +33,6 @@ Example files are included with each script. Use the command `get-help <scriptna
 
 Define any necessary environment variables for the application:
 
-- `STOCK_API_TYPE`: Type of stock API to use (e.g., `yfinance`, `alpha_vantage`, `polygon`). Default: `yfinance`.
-- `QUEUE_TYPE`: Type of queue for data transfer (`sqs` or `rabbitmq`). Default: `sqs`.
-- `SQS_QUEUE_URL`: URL of the SQS queue (required if `QUEUE_TYPE=sqs`).
-- `RABBITMQ_HOST`: RabbitMQ server address (default: `localhost`).
-- `RABBITMQ_QUEUE_NAME`: Name of the RabbitMQ queue (default: `stock_queue`).
 
 ## Example .env File
 
