@@ -32,7 +32,7 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'python']
-        build-mode: [ 'manual']
+        build-mode: [ 'none']
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -56,7 +56,7 @@ jobs:
     # to build your code.
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-    - if: matrix.build-mode == 'manual'
+    - if: matrix.build-mode == 'none'
       shell: bash
       run: |
         echo 'If you are using a "manual" build mode for one or more of the' \
