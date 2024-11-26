@@ -1,11 +1,11 @@
-def main():
+def main() -> None:
     """
     Main function that serves as the entry point of the script.
     """
     # Display a welcome message to the console
-    welcome_message = "Hello, Dockerized Python world!"
-    print(welcome_message)
+    welcome = "Hello, Dockerized Python world!"
+    print(welcome)
 
     # Display a farewell message to the console
-    farewell_message = "Goodbye, Dockerized Python world!"
-    print(farewell_message)
+    farewell = "Goodbye, Dockerized Python world!"
+    print(farewell)
