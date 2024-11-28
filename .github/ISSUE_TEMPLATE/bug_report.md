@@ -11,6 +11,7 @@ A clear and concise description of what the bug is.
 
 **Steps to Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Run the following command '...'
 3. Observe the output '...'
@@ -25,9 +26,10 @@ What actually happens instead of the expected behavior.
 If applicable, add screenshots or logs to help explain your problem.
 
 **Environment**
- - OS: [e.g., Windows 11, macOS Ventura]
- - Python version: [e.g., 3.10.7]
- - Dependencies version: [e.g., `requirements.txt` output]
+
+- OS: [e.g., Windows 11, macOS Ventura]
+- Python version: [e.g., 3.10.7]
+- Dependencies version: [e.g., `requirements.txt` output]
 
 **Additional context**
 Add any other context about the problem here.

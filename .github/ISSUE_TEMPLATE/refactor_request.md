@@ -13,7 +13,7 @@ What part of the code needs improvement? Why?
 Explain why the current implementation needs to be improved. Is it inefficient, outdated, or hard to understand?
 
 **Proposed approach**
-Describe how the refactoring could be implemented. 
+Describe how the refactoring could be implemented.
 
 **Additional context**
 Add any additional context or concerns related to the refactor.
