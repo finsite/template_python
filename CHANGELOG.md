@@ -1,8 +1,12 @@
-## [1.0.1] - 2024-11-25
-### Fixed
-- Fixed minor bugs.
+# [1.1.0] - 2023-05-25
 
-## [1.0.0] - 2024-11-20
-### Added
-- Initial release.
--  (Commit: be0469f)
+- Fixed a bug in the CSV export module.
+- Added support for exporting data to JSON.
+
+## Added
+
+- Support for exporting data to JSON.
+
+### Fixed
+
+- A bug in the CSV export module.
