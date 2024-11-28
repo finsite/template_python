@@ -1,9 +1,9 @@
-name: Security Scan
+name: Testing
 
 on: [push, pull_request]
 
 jobs:
-  security-scan:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -17,10 +17,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install bandit safety
+          pip install pytest pytest-cov
 
-      - name: Run Bandit (code security)
-        run: bandit -r your_project
+      - name: Run tests
+        run: pytest --cov=your_project --cov-report=xml
 
-      - name: Run Safety (dependency security)
-        run: safety check -r requirements.txt
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

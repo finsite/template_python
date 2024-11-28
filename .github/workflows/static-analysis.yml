@@ -1,9 +1,9 @@
-name: Security Scan
+name: Static Analysis
 
 on: [push, pull_request]
 
 jobs:
-  security-scan:
+  static-analysis:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -17,10 +17,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install bandit safety
+          pip install mypy pylint
 
-      - name: Run Bandit (code security)
-        run: bandit -r your_project
-
-      - name: Run Safety (dependency security)
-        run: safety check -r requirements.txt
+      - name: Run static analysis
+        run: |
+          mypy your_project
+          pylint your_project
