@@ -3,29 +3,37 @@ name: Update Changelog
 on:
   push:
     branches:
-      - main  # Run this workflow only on pushes to the main branch
+      - main
+
+permissions:
+  contents: write
 
 jobs:
   update-changelog:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
-    - name: Install dependencies
-      run: npm install -g conventional-changelog-cli
+      - name: Install dependencies
+        run: pip install bump-my-version
 
-    - name: Generate changelog
-      run: |
-        conventional-changelog -p angular -i CHANGELOG.md -s
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add CHANGELOG.md
-        git commit -m "chore: update changelog"
-        git push
+      - name: Update changelog
+        run: |
+          bump-my-version --changelog CHANGELOG.md
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add CHANGELOG.md
+          git commit -m "Update changelog"
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

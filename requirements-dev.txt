@@ -22,20 +22,20 @@ sphinx==7.2.2          # For generating documentation
 sphinx-rtd-theme==3.0.2  # ReadTheDocs theme for Sphinx
 
 # Build tools
-build==0.11.0          # For building Python packages
+build==1.2.2.post1          # For building Python packages
 twine==4.0.2           # For publishing to PyPI
 
 # Git pre-commit hooks (optional but recommended)
-pre-commit==3.5.0      # For managing pre-commit hooks
+pre-commit==4.0.1     # For managing pre-commit hooks
 
 # Docker linting (if applicable)
-hadolint==1.6.0        # For Dockerfile linting
+hadolintw==1.2.1        # For Dockerfile linting
 
 # Coverage tools
 coverage==7.2.7        # For test coverage metrics
 
 # Mocking/stubbing for tests (if needed)
-pytest-mock==3.11.0    # For mocking dependencies in tests
+pytest-mock==3.14.0   # For mocking dependencies in tests
 
 # Version management
-bump-my-version==1.0.3  # For automated version bumping
+bump-my-version==0.28.1  # For automated version bumping
