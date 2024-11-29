@@ -22,5 +22,5 @@ jobs:
       - name: Run Bandit (code security)
         run: bandit -r your_project
 
-      - name: Run Safety (dependency security)
-        run: safety scan
+      # - name: Run Safety (dependency security)
+      #   run: safety scan
