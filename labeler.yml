@@ -40,8 +40,8 @@ Documentation:
 source:
 - all:
   - changed-files:
-    - any-glob-to-any-file: 'src/**/*'
-    - all-globs-to-all-files: '!src/docs/*'
+    - any-glob-to-any-file: 'app/**/*'
+    - all-globs-to-all-files: '!app/docs/*'
 
 # Add 'feature' label to any PR where the head branch name starts with `feature` or has a `feature` section in the name
 feature:
