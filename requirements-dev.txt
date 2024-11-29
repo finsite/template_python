@@ -15,7 +15,7 @@ xenon==0.9.0           # For code complexity analysis
 
 # Security tools
 bandit==1.7.5          # For identifying security vulnerabilities in code
-safety==2.4.0          # For checking dependencies for known vulnerabilities
+safety==3.2.11         # For checking dependencies for known vulnerabilities
 
 # Documentation tools
 sphinx==7.2.2          # For generating documentation
