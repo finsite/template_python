@@ -12,17 +12,14 @@
 - A bug in the CSV export module.
 
 ## [Unreleased]
-- 
-- 
-- 
-- 
-- 
-- 
-<<<<<<< Updated upstream
-- 
-=======
->>>>>>> Stashed changes
 
+-
+-
+-
+-
+-
+-
+-
 -
 -
 -
