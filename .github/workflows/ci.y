@@ -34,9 +34,9 @@ jobs:
   #     - name: Set up Python
   #       # Set up the Python version specified in the cookiecutter template
   #       uses: actions/setup-python@v2
-  #       with: 
+  #       with:
   #         python-version: '3.x'
-          
+
   #     - name: Install dependencies
   #       # Install the dependencies specified in the requirements file
   #       run: |
