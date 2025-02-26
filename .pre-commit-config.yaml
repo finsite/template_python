@@ -1,3 +1,120 @@
+# repos:
+#   # ✅ Basic Code Hygiene (Trailing Whitespace, Newlines, YAML/JSON Checks)
+#   - repo: https://github.com/pre-commit/pre-commit-hooks
+#     rev: "v5.0.0"
+#     hooks:
+#       - id: trailing-whitespace
+#       - id: end-of-file-fixer
+#       - id: check-yaml
+#       - id: check-json
+#       - id: detect-private-key
+
+#   # ✅ Autoformatting (Black)
+#   - repo: https://github.com/psf/black
+#     rev: "25.1.0"
+#     hooks:
+#       - id: black
+
+#   # ✅ Linting (Flake8)
+#   - repo: https://github.com/PyCQA/flake8
+#     rev: "7.1.2"
+#     hooks:
+#       - id: flake8
+#         additional_dependencies: ["flake8-bugbear", "flake8-import-order"]
+
+#   # ✅ Type Checking (Mypy)
+#   - repo: https://github.com/pre-commit/mirrors-mypy
+#     rev: "v1.15.0"
+#     hooks:
+#       - id: mypy
+
+#   # ✅ Python Syntax Upgrades (PyUpgrade)
+#   - repo: https://github.com/asottile/pyupgrade
+#     rev: "v3.19.1"
+#     hooks:
+#       - id: pyupgrade
+#         args: ["--py311-plus"]
+
+#   # ✅ Import Sorting (Isort) - Now only applies to `.py` files
+#   - repo: https://github.com/pre-commit/mirrors-isort
+#     rev: "v5.10.1"
+#     hooks:
+#       - id: isort
+#         args: ["--filter-files"]
+#         files: "\\.py$"
+
+#   # ✅ Security Checks for Python Code (Bandit)
+#   - repo: https://github.com/PyCQA/bandit
+#     rev: "1.8.3"
+#     hooks:
+#       - id: bandit
+#         args: ["-r", "src"]
+
+#   # ✅ Security Checks for Python Code (Safety) - Now only scans `requirements.txt`
+#   - repo: local
+#     hooks:
+#       - id: safety
+#         name: safety
+#         entry: safety check --full-report --file=requirements.txt
+#         language: system
+#         types: [python]
+#         pass_filenames: false
+
+#   # ✅ Dead Code & Unused Imports (Vulture) - Now ignores `docs/`
+#   - repo: https://github.com/jendrikseipp/vulture
+#     rev: "v2.14"
+#     hooks:
+#       - id: vulture
+#         args: ["src"]  # Only scan `src/`
+#         exclude: "docs/.*|tests/.*"
+
+#   # ✅ Dockerfile Linting (Hadolint)
+#   - repo: https://github.com/hadolint/hadolint
+#     rev: "v2.13.1-beta"
+#     hooks:
+#       - id: hadolint
+
+#   # ✅ YAML Linting (Yamllint)
+#   - repo: https://github.com/adrienverge/yamllint
+#     rev: "v1.35.1"
+#     hooks:
+#       - id: yamllint
+
+#   # ✅ Markdown Linting (Markdownlint) - Ensure `npx` works correctly
+#   - repo: local
+#     hooks:
+#       - id: markdownlint
+#         name: markdownlint
+#         entry: npx --no-install markdownlint-cli
+#         language: system
+#         files: "\\.md$"
+#         pass_filenames: true
+
+#   # ✅ Shell Script Linter (ShellCheck)
+#   - repo: https://github.com/koalaman/shellcheck-precommit
+#     rev: "v0.10.0"
+#     hooks:
+#       - id: shellcheck
+
+#   # ✅ Python Security Check (Pip-Audit) - Now only scans `requirements.txt`
+#   - repo: local
+#     hooks:
+#       - id: pip-audit
+#         name: pip-audit
+#         entry: pip-audit --requirement requirements.txt
+#         language: system
+#         types: [python]
+#         pass_filenames: false
+
+#   # ✅ Sphinx Documentation Validation
+#   - repo: local
+#     hooks:
+#       - id: sphinx-lint
+#         name: Sphinx Docs Build
+#         entry: sphinx-build -W -b html docs/source docs/build
+#         language: system
+#         pass_filenames: false
+#         always_run: true
 repos:
   # ✅ Basic Code Hygiene (Trailing Whitespace, Newlines, YAML/JSON Checks)
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -35,77 +152,95 @@ repos:
       - id: pyupgrade
         args: ["--py311-plus"]
 
-  # ✅ Import Sorting (Isort)
+  # ✅ Import Sorting (Isort) - Only applies to `.py` files
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: "v5.10.1"
     hooks:
       - id: isort
-        args: ["."]
+        args: ["--filter-files"]
+        files: "\\.py$"
 
-  # ✅ Security Checks for Python Code (Bandit)
+  # ✅ Security Checks for Python Code (Bandit) - Excludes `tests/`
+  # - repo: https://github.com/PyCQA/bandit
+  #   rev: "1.8.3"
+  #   hooks:
+  #     - id: bandit
+  #       args: ["-r", "src", "--exclude", "tests", "--skip", "B101,B110"]
   - repo: https://github.com/PyCQA/bandit
     rev: "1.8.3"
     hooks:
       - id: bandit
-        args: ["-r", "src"]
+        entry: bandit -r src --exclude "tests/*,docs/*,setup.py"
+        language: python
+        pass_filenames: false
 
-  # ✅ Dependency Security Check (Safety)
-  # - repo: https://github.com/pyupio/safety
-  #   rev: "v2.3.5"
-  #   hooks:
-  #     - id: safety
-  #       args: ["--full-report"]
 
+  # ✅ Security Checks for Python Code (Safety) - Now only scans `requirements.txt`
   - repo: local
     hooks:
       - id: safety
         name: safety
-        entry: safety check --full-report
+        entry: safety check --full-report --file=requirements.txt
         language: system
         types: [python]
+        pass_filenames: false
 
-
-  # ✅ Dead Code & Unused Imports (Vulture)
+  # ✅ Dead Code & Unused Imports (Vulture) - Ignores Docs & Tests
   - repo: https://github.com/jendrikseipp/vulture
     rev: "v2.14"
     hooks:
       - id: vulture
         args: ["src"]
+        exclude: "docs/.*|tests/.*"
 
-  # ✅ Dockerfile Linting (Hadolint)
+  # ✅ Dockerfile Linting (Hadolint) - Uses System Binary
   - repo: https://github.com/hadolint/hadolint
     rev: "v2.13.1-beta"
     hooks:
       - id: hadolint
+        entry: hadolint  # Uses system-installed binary
+        language: system
 
-  # ✅ YAML Linting (Yamllint) - **Fixed Pre-Commit Mirror**
+  # ✅ YAML Linting (Yamllint)
   - repo: https://github.com/adrienverge/yamllint
     rev: "v1.35.1"
     hooks:
       - id: yamllint
 
-  # ✅ Markdown Linting (Markdownlint) - **Fixed Pre-Commit Mirror**
+  # ✅ Markdown Linting (Markdownlint) - Uses Windows-Compatible `npx`
   - repo: local
     hooks:
       - id: markdownlint
         name: markdownlint
-        entry: npx --no-install markdownlint-cli
+        entry: npx markdownlint-cli
         language: system
-        files: \.md$
+        files: "\\.md$"
         pass_filenames: true
 
-  # ✅ Shell Script Linter (ShellCheck) - **Fixed Pre-Commit Mirror**
+  # ✅ Shell Script Linter (ShellCheck) - Uses System Binary
   - repo: https://github.com/koalaman/shellcheck-precommit
     rev: "v0.10.0"
     hooks:
       - id: shellcheck
+        entry: shellcheck  # Uses system-installed binary
+        language: system
 
-
-  # ✅ Python Security Check (Pip-Audit) - **Fixed Pre-Commit Mirror**
+  # ✅ Python Security Check (Pip-Audit) - Now only scans `requirements.txt`
   - repo: local
     hooks:
       - id: pip-audit
         name: pip-audit
-        entry: pip-audit
+        entry: pip-audit --requirement requirements.txt
         language: system
         types: [python]
+        pass_filenames: false
+
+  # ✅ Sphinx Documentation Validation - Windows-Compatible
+  - repo: local
+    hooks:
+      - id: sphinx-lint
+        name: Sphinx Docs Build
+        entry: cmd /c "if exist src (sphinx-build -W -b html docs/source docs/build)"
+        language: system
+        pass_filenames: false
+        always_run: true

@@ -25,7 +25,7 @@ What actually happens instead of the expected behavior.
 **Screenshots or Logs**
 If applicable, add screenshots or logs to help explain your problem.
 
-**Environment**
+# #Environment #
 
 - OS: [e.g., Windows 11, macOS Ventura]
 - Python version: [e.g., 3.10.7]
