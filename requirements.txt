@@ -28,6 +28,7 @@ yamllint  # YAML file linting
 #markdownlint-cli  # Markdown linting (requires Node.js)
 #hadolint  # Dockerfile linting
 #shellcheck  # Shell script linting
+yamlfix
 
 # Testing
 pytest
