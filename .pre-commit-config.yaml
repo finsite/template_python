@@ -77,6 +77,12 @@ repos:
       - id: hadolint
         entry: hadolint # Uses system-installed binary
         language: system
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "" # Use the latest stable version
+    hooks:
+      - id: prettier
+        args: ["--print-width", "80"]
+        additional_dependencies: ["prettier@latest"]
   - repo: https://github.com/google/yamlfmt
     # # ✅ YAML Formatting
 
@@ -106,7 +112,7 @@ repos:
     rev: v0.13.0 # Use the latest stable version
     hooks:
       - id: markdownlint-cli2
-        args: ['--fix']
+        args: ["--fix"]
   - repo: https://github.com/koalaman/shellcheck-precommit
     # ✅ Shell Script Linter (ShellCheck) - Uses System Binary
 

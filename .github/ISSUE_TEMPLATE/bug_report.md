@@ -3,7 +3,7 @@ name: 🐛 Bug Report
 about: Report a bug to help us improve the project
 title: "[BUG] Describe the issue concisely"
 labels: bug
-assignees: ''
+assignees: ""
 ---
 
 **Describe the bug**
@@ -25,7 +25,7 @@ What actually happens instead of the expected behavior.
 **Screenshots or Logs**
 If applicable, add screenshots or logs to help explain your problem.
 
-# #Environment #
+# #Environment
 
 - OS: [e.g., Windows 11, macOS Ventura]
 - Python version: [e.g., 3.10.7]

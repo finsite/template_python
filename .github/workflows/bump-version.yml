@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       bump-type:
-        description: 'Bump type'
+        description: "Bump type"
         required: true
-        default: 'patch'
+        default: "patch"
         type: choice
         options:
           - major
