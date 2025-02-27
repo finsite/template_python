@@ -1,30 +1,29 @@
-# ---- Base image for building dependencies ----
-    FROM python:3.11-slim AS builder
+# Use a minimal and secure Python base image
+FROM python:3.11-slim AS base
 
-    WORKDIR /src/app
-    
-    # Install system dependencies
-    RUN apt-get update && apt-get install -y --no-install-recommends \
-        gcc \
-        libpq-dev \
-        && rm -rf /var/lib/apt/lists/*
-    
-    # Install dependencies
-    COPY pyproject.toml poetry.lock requirements.txt requirements-dev.txt ./
-    RUN pip install --no-cache-dir --upgrade pip \
-        && pip install --no-cache-dir -r requirements.txt
-    
-    # ---- Final runtime image ----
-    FROM python:3.11-slim AS runtime
-    
-    WORKDIR /src/app
-    
-    # Copy installed dependencies from builder stage
-    COPY --from=builder /usr/local/lib/python3.11 /usr/local/lib/python3.11
-    
-    # Copy application code
-    COPY . .
-    
-    # Define entrypoint
-    CMD ["python", "-m", "src.app"]
-    
+# Set environment variables to optimize Python behavior
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONFAULTHANDLER=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Set the working directory
+WORKDIR /src/app
+
+# Install system dependencies (pin versions and avoid extra packages)
+# hadolint ignore=DL3008
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc=12.2.0-14 \
+    libpq-dev=15.2-1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy and install dependencies from `requirements.txt`
+COPY requirements.txt .
+# hadolint ignore=DL3013
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application source code
+COPY . .
+
+# Define the default command (modify as needed)
+CMD ["python", "-m", "src.app"]

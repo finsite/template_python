@@ -1,37 +1,13 @@
 # Core dependencies
-pandas
-numpy
-scipy
-matplotlib
-pika  # For RabbitMQ integration
-boto3  # If using SQS
-loguru  # Enhanced logging
-python-dotenv  # Environment variable management
+pandas>=1.5.0,<2.0
+numpy>=1.23.0,<2.0
+scipy>=1.9.0,<2.0
+matplotlib>=3.6.0,<4.0
 
-# Documentation (Sphinx + ReadTheDocs Theme + Markdown Support)
-sphinx
-sphinx-rtd-theme
-myst-parser  # Enables Markdown (.md) support
-sphinx-autodoc-typehints  # Automatically includes type hints in docs
+# Messaging and Cloud
+pika>=1.3.0  # For RabbitMQ integration
+boto3>=1.28.0  # If using AWS SQS
 
-# Code Quality & Pre-Commit Hooks
-pre-commit
-black  # Auto-formatting
-flake8  # Linter
-mypy  # Type checking
-isort  # Import sorting
-bandit  # Security linter for Python code
-vulture  # Detects unused code
-safety  # Checks for vulnerabilities in dependencies
-pip-audit  # Security audit for installed dependencies
-yamllint  # YAML file linting
-#markdownlint-cli  # Markdown linting (requires Node.js)
-#hadolint  # Dockerfile linting
-#shellcheck  # Shell script linting
-yamlfix
-
-# Testing
-pytest
-pytest-mock
-pytest-cov  # Test coverage reporting
-tox  # Multi-environment testing
+# Logging & Environment Management
+loguru>=0.7.0  # Enhanced logging
+python-dotenv>=1.0.0  # Environment variable management
