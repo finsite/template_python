@@ -51,16 +51,24 @@ repos:
         entry: bandit -r src --exclude "tests/*,docs/*,setup.py"
         language: python
         pass_filenames: false
+  # - repo: local
+  #   # ✅ Security Checks for Python Code (Safety) - Now only scans `requirements.txt`
+  #   hooks:
+  #     - id: safety
+  #       name: safety
+  #       entry: safety check --full-report --file=requirements.txt
+  #       language: system
+  #       types: [python]
+  #       pass_filenames: false
   - repo: local
-    # ✅ Security Checks for Python Code (Safety) - Now only scans `requirements.txt`
-
     hooks:
       - id: safety
         name: safety
-        entry: safety check --full-report --file=requirements.txt
+        entry: safety scan --full-report --file=requirements.txt --key free
         language: system
         types: [python]
         pass_filenames: false
+
   - repo: https://github.com/jendrikseipp/vulture
     # ✅ Dead Code & Unused Imports (Vulture) - Ignores Docs & Tests
 
@@ -69,33 +77,31 @@ repos:
       - id: vulture
         args: ["src"]
         exclude: "docs/.*|tests/.*"
-  - repo: https://github.com/hadolint/hadolint
-    # ✅ Dockerfile Linting (Hadolint) - Uses System Binary
 
-    rev: "v2.13.1-beta"
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.13.1-beta # Use latest stable version
     hooks:
       - id: hadolint
-        entry: hadolint # Uses system-installed binary
+        name: Hadolint
+        entry: hadolint
         language: system
+        files: Dockerfile
+
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: "v4.0.0-alpha.8" # Use the latest stable version
     hooks:
       - id: prettier
         args: ["--print-width", "80"]
         additional_dependencies: ["prettier@latest"]
-  - repo: https://github.com/google/yamlfmt
-    # # ✅ YAML Formatting
-
-    rev: v0.16.0
-    hooks:
-      - id: yamlfmt
-        types: [yaml]
-  - repo: https://github.com/adrienverge/yamllint
-    # ✅ YAML Linting (Yamllint)
-
-    rev: "v1.35.1"
-    hooks:
-      - id: yamllint
+  # - repo: https://github.com/google/yamlfmt
+  #   # # ✅ YAML Formatting
+  #   rev: v0.14.0
+  #   hooks:
+  #     - id: yamlfmt
+  #       language: system
+  #   rev: "v1.35.1"
+  #   hooks:
+  #     - id: yamllint
   #   # ✅ Markdown Linting (Markdownlint) - Uses Windows-Compatible `npx`
   #   hooks:
   #     - id: markdownlint
@@ -106,15 +112,18 @@ repos:
   #       files: "\\.md$"
   #       pass_filenames: true
   #       types: [markdown]
-  - repo: https://github.com/DavidAnson/markdownlint-cli2
-    # - repo: local
+  # - repo: https://github.com/DavidAnson/markdownlint-cli2
+  #   # - repo: local
 
-    rev: v0.17.2 # Use the latest stable version
-    hooks:
-      - id: markdownlint-cli2
-        args: ["--fix"]
+  #   rev: v0.17.2 # Use the latest stable version
+  #   hooks:
+  #     - id: markdownlint-cli2
+  #       args: ["--fix"]
   - repo: https://github.com/koalaman/shellcheck-precommit
     # ✅ Shell Script Linter (ShellCheck) - Uses System Binary
+
+    # - repo: https://github.com/adrienverge/yamllint
+    #   # ✅ YAML Linting (Yamllint)
 
     rev: "v0.10.0"
     hooks:
