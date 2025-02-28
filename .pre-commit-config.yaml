@@ -3,8 +3,8 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: "v5.0.0"
     hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
+      #- id: trailing-whitespace
+      #- id: end-of-file-fixer
       - id: check-yaml
       - id: check-json
       - id: detect-private-key
@@ -144,9 +144,15 @@ repos:
         args: [--fix]
         types: [python]
 
-  # - repo: https://github.com/pre-commit/mirrors-pylint
-  #   rev: v3.0.0a5  # Use the latest stable version
-  #   hooks:
-  #     - id: pylint
-  #       args: ["--rcfile=pylintrc"]
-  #       additional_dependencies: ["pylint"]
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args: [
+            "-rn", # Only display messages
+            "--rcfile=pylintrc", # Link to your config file
+            "--load-plugins=pylint.extensions.docparams", # Load an extension
+          ]
