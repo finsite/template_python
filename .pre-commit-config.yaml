@@ -8,58 +8,50 @@ repos:
       - id: check-yaml
       - id: check-json
       - id: detect-private-key
+
   - repo: https://github.com/psf/black
     # ✅ Autoformatting (Black)
-
     rev: "25.1.0"
     hooks:
       - id: black
+
   - repo: https://github.com/PyCQA/flake8
     # ✅ Linting (Flake8)
-
     rev: "7.1.2"
     hooks:
       - id: flake8
         additional_dependencies: ["flake8-bugbear", "flake8-import-order"]
+
   - repo: https://github.com/pre-commit/mirrors-mypy
     # ✅ Type Checking (Mypy)
-
     rev: "v1.15.0"
     hooks:
       - id: mypy
+
   - repo: https://github.com/asottile/pyupgrade
     # ✅ Python Syntax Upgrades (PyUpgrade)
-
     rev: "v3.19.1"
     hooks:
       - id: pyupgrade
         args: ["--py311-plus"]
+
   - repo: https://github.com/pre-commit/mirrors-isort
     # ✅ Import Sorting (Isort) - Only applies to `.py` files
-
     rev: "v5.10.1"
     hooks:
       - id: isort
         args: ["--filter-files"]
         files: "\\.py$"
+
   - repo: https://github.com/PyCQA/bandit
     # ✅ Security Linter for Python Code (Bandit)
-
     rev: "1.8.3"
     hooks:
       - id: bandit
         entry: bandit -r src --exclude "tests/*,docs/*,setup.py"
         language: python
         pass_filenames: false
-  # - repo: local
-  #   # ✅ Security Checks for Python Code (Safety) - Now only scans `requirements.txt`
-  #   hooks:
-  #     - id: safety
-  #       name: safety
-  #       entry: safety check --full-report --file=requirements.txt
-  #       language: system
-  #       types: [python]
-  #       pass_filenames: false
+
   - repo: local
     hooks:
       - id: safety
@@ -71,7 +63,6 @@ repos:
 
   - repo: https://github.com/jendrikseipp/vulture
     # ✅ Dead Code & Unused Imports (Vulture) - Ignores Docs & Tests
-
     rev: "v2.14"
     hooks:
       - id: vulture
@@ -121,10 +112,6 @@ repos:
   #       args: ["--fix"]
   - repo: https://github.com/koalaman/shellcheck-precommit
     # ✅ Shell Script Linter (ShellCheck) - Uses System Binary
-
-    # - repo: https://github.com/adrienverge/yamllint
-    #   # ✅ YAML Linting (Yamllint)
-
     rev: "v0.10.0"
     hooks:
       - id: shellcheck
@@ -132,7 +119,6 @@ repos:
         language: system
   - repo: local
     # ✅ Python Security Check (Pip-Audit) - Now only scans `requirements.txt`
-
     hooks:
       - id: pip-audit
         name: pip-audit
@@ -150,11 +136,17 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.9.7 # Use the latest stable version
+    rev: v0.9.8 # Use the latest stable version
     hooks:
       - id: ruff
         args: [--fix]
-        # Apply to Python files only
-
         types: [python]
+
+  # - repo: https://github.com/pre-commit/mirrors-pylint
+  #   rev: v3.0.0a5  # Use the latest stable version
+  #   hooks:
+  #     - id: pylint
+  #       args: ["--rcfile=pylintrc"]
+  #       additional_dependencies: ["pylint"]
