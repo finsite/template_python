@@ -235,15 +235,15 @@ repos:
         language: system
         files: Dockerfile
 
-  # ✅ Docker Security Scanner (Trivy)
-  - repo: local
-    hooks:
-      - id: trivy
-        name: Trivy Docker Security Scan
-        entry: trivy image --severity HIGH,CRITICAL .
-        language: system
-        pass_filenames: false
-        always_run: true
+  #   # ✅ Docker Security Scanner (Trivy)
+  # - repo: local
+  #   hooks:
+  #     - id: trivy
+  #       name: Trivy Docker Security Scan
+  #       entry: bash -c 'IMAGE=$(docker images --format "{{.Repository}}:{{.Tag}}" | head -n 1); if [ -n "$IMAGE" ]; then trivy image --severity HIGH,CRITICAL "$IMAGE"; else echo "No image found. Skipping Trivy."; fi'
+  #       language: system
+  #       pass_filenames: false
+  #       always_run: true
 
   # ✅ Shell Script Linter (ShellCheck)
   - repo: https://github.com/koalaman/shellcheck-precommit

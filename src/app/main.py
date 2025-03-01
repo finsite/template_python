@@ -1,6 +1,7 @@
-from typing import Union, Any  # ✅ Fixes the error
+from typing import Any  # ✅ Fixes the error
 
-def add_numbers(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
+
+def add_numbers(a: int | float, b: int | float) -> int | float:
     """
     Adds two numbers and returns the result.
 
