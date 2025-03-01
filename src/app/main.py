@@ -1,19 +1,36 @@
-def add_numbers(a, b):
-    """Adds two numbers and returns the result."""
+from typing import Union, Any  # ✅ Fixes the error
+
+def add_numbers(a: Union[int, float], b: Union[int, float]) -> Union[int, float]:
+    """
+    Adds two numbers and returns the result.
+
+    Args:
+        a (Union[int, float]): The first number.
+        b (Union[int, float]): The second number.
+
+    Returns:
+        Union[int, float]: The sum of the two numbers.
+    """
     return a + b
-
-
-def unused_function():
-    """This function is intentionally left unused to test Pylint warnings."""
-    pass
 
 
 class ExampleClass:
     """A simple example class."""
 
-    def __init__(self, value):
+    def __init__(self, value: Any):
+        """
+        Initializes ExampleClass.
+
+        Args:
+            value (Any): The value to store.
+        """
         self.value = value
 
-    def get_value(self):
-        """Returns the value."""
+    def get_value(self) -> Any:
+        """
+        Retrieve the value assigned to the object.
+
+        Returns:
+            Any: The stored value.
+        """
         return self.value
