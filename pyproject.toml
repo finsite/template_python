@@ -1,0 +1,7 @@
+[tool.pytest.ini_options]
+addopts = "--cov=src.app --cov-report=term-missing"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
