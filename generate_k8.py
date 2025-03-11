@@ -1,78 +1,95 @@
 import os
-import subprocess
 import argparse
 
-# Set up argument parser
-parser = argparse.ArgumentParser(description="Generate Kubernetes, Helm, and ArgoCD files for a repository.")
-parser.add_argument("repo_name", help="The name of the repository")
-parser.add_argument("--env", choices=["dev", "prod"], default="dev", help="Specify the environment (dev or prod)")
-args = parser.parse_args()
 
-repo_name = args.repo_name
-env = args.env
+def parse_arguments() -> argparse.Namespace:
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(
+        description="Generate Kubernetes, Helm, and ArgoCD files for a repository."
+    )
+    parser.add_argument(
+        "repository_name", help="The name of the repository (e.g. stock-tech-movavg)"
+    )
+    parser.add_argument(
+        "--environment",
+        choices=["dev", "prod"],
+        default="dev",
+        help="Specify the environment (dev or prod)",
+    )
+    return parser.parse_args()
 
-# Ensure necessary directories exist
-os.makedirs("k8s", exist_ok=True)
-os.makedirs("helm/templates", exist_ok=True)
-os.makedirs(".github/workflows", exist_ok=True)
 
-# Define environment-specific values
-replica_count = 1 if env == "dev" else 3
-log_level = "debug" if env == "dev" else "info"
-rabbitmq_host = f"{repo_name}-rabbitmq.dev.internal" if env == "dev" else f"{repo_name}-rabbitmq.prod.internal"
-rabbitmq_queue = f"{repo_name}_dev_queue" if env == "dev" else f"{repo_name}_prod_queue"
+def create_directories() -> None:
+    """Ensure necessary directories exist."""
+    os.makedirs("k8s", exist_ok=True)
+    os.makedirs("helm/templates", exist_ok=True)
+    os.makedirs(".github/workflows", exist_ok=True)
 
-# Define file contents
-files = {
-    "k8s/deployment.yaml": f"""\
+
+def get_env_values(repository_name: str, environment: str) -> dict[str, str | int]:
+    """Define environment-specific values."""
+    return {
+        "replica_count": 1 if environment == "dev" else 3,
+        "log_level": "DEBUG" if environment == "dev" else "INFO",
+        "rabbitmq_host": f"{repository_name}-rabbitmq.{environment}.internal",
+        "rabbitmq_queue": f"{repository_name}_{environment}_queue",
+    }
+
+
+def generate_files(
+    repository_name: str, environment: str, env_values: dict[str, str | int]
+) -> dict[str, str]:
+    """Generate Kubernetes and Helm configuration files."""
+    files = {
+        "k8s/deployment.yaml": f"""\
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {repo_name}
+  name: {repository_name}
 spec:
-  replicas: {replica_count}
+  replicas: {env_values["replica_count"]}
   selector:
     matchLabels:
-      app: {repo_name}
+      app: {repository_name}
   template:
     metadata:
       labels:
-        app: {repo_name}
+        app: {repository_name}
     spec:
       containers:
-        - name: {repo_name}
-          image: your-registry/{repo_name}:latest
+        - name: {repository_name}
+          image: your-registry/{repository_name}:latest
           ports:
             - containerPort: 8000
           env:
             - name: ENVIRONMENT
-              value: "{env}"
+              value: "{environment}"
             - name: LOG_LEVEL
-              value: "{log_level}"
+              value: "{env_values["log_level"]}"
             - name: RABBITMQ_HOST
-              value: "{rabbitmq_host}"
+              value: "{env_values["rabbitmq_host"]}"
             - name: RABBITMQ_QUEUE
-              value: "{rabbitmq_queue}"
+              value: "{env_values["rabbitmq_queue"]}"
 """,
-    "k8s/service.yaml": f"""\
+        "k8s/service.yaml": f"""\
 apiVersion: v1
 kind: Service
 metadata:
-  name: {repo_name}-service
+  name: {repository_name}-service
 spec:
   selector:
-    app: {repo_name}
+    app: {repository_name}
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8000
   type: LoadBalancer
 """,
-    "helm/values.yaml": f"""\
-replicaCount: {replica_count}
+        "helm/values.yaml": f"""\
+replicaCount: {env_values["replica_count"]}
 
 image:
-  repository: your-registry/{repo_name}
+  repository: your-registry/{repository_name}
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -82,20 +99,34 @@ service:
   targetPort: 8000
 
 environment:
-  ENVIRONMENT: "{env}"
-  LOG_LEVEL: "{log_level}"
-  RABBITMQ_HOST: "{rabbitmq_host}"
-  RABBITMQ_QUEUE: "{rabbitmq_queue}"
+  ENVIRONMENT: "{environment}"
+  LOG_LEVEL: "{env_values["log_level"]}"
+  RABBITMQ_HOST: "{env_values["rabbitmq_host"]}"
+  RABBITMQ_QUEUE: "{env_values["rabbitmq_queue"]}"
 """,
-    "README.md": f"""\
-# {repo_name}
+    }
+    return files
 
-## 🚀 Deployment Options
 
-This repository supports multiple deployment methods:
+def write_files(files: dict[str, str]) -> None:
+    """Write generated files to disk."""
+    for filename, content in files.items():
+        with open(filename, "w") as f:
+            f.write(content)
 
-### 🛠 1. Kubernetes (Manual)
-Manually apply Kubernetes manifests in the `k8s/` folder:
 
-```sh
-kubectl apply -f k8s/
+def main() -> None:
+    """Main function to run the script."""
+    args = parse_arguments()
+    create_directories()
+    env_values = get_env_values(args.repository_name, args.environment)
+    files = generate_files(args.repository_name, args.environment, env_values)
+    write_files(files)
+
+    print(
+        f"✅ Kubernetes, Helm, and ArgoCD files generated for {args.repository_name} (Environment: {args.environment})"
+    )
+
+
+if __name__ == "__main__":
+    main()
