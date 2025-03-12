@@ -1,4 +1,4 @@
-name: Bump version
+name: Bump My Version
 on:
   workflow_dispatch:
     inputs:
@@ -29,3 +29,4 @@ jobs:
         if: steps.bump.outputs.bumped == 'true'
         run: |
           echo "Version was bumped from ${{ steps.bump.outputs.previous-version }} to ${{ steps.bump.outputs.current-version }}!"
+

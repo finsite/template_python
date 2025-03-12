@@ -1,4 +1,4 @@
-name: Testing
+name: Pytest Testing
 on: [push, pull_request]
 jobs:
   tests:
