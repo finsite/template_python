@@ -1,4 +1,4 @@
-name: BanditSecurity Scan
+name: Bandit Security Scan
 on: [push, pull_request]
 jobs:
   security-scan:
@@ -16,5 +16,4 @@ jobs:
           pip install bandit safety
       - name: Run Bandit (code security)
         run: bandit .
-# - name: Run Safety (dependency security)
-#   run: safety scan
+
