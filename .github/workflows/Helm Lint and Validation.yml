@@ -1,0 +1,30 @@
+name: Helm Lint, Template, and Package Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  helm-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Set up Authentication
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "GITHUB_TOKEN set"
+
+      - name: Lint Helm Charts
+        run: helm lint helm/
+
+      - name: Run Helm Template Validation
+        run: helm template my-release helm/ --debug
+
+      - name: Package Helm Chart
+        run: helm package helm/

@@ -1,0 +1,30 @@
+name: Helm Dry-Run Deployment
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  helm-dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Set up Authentication
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "GITHUB_TOKEN set"
+
+      - name: Set Up Kubernetes (Kind)
+        uses: helm/kind-action@v1
+        with:
+          version: v0.20.0  # Explicit Kind version for stability
+
+      - name: Install Helm Chart (Dry Run)
+        run: helm install test-release helm/ --dry-run --debug
+
