@@ -80,3 +80,7 @@ tox-extra==0.2.0       # Consider removing if unused
 # Miscellaneous utilities
 rich==13.7.0           # ✅ Improves CLI output for debugging and testing
 
+#formatting and commit validation and linting
+black==25.1.0
+commitizen==4.4.1
+
