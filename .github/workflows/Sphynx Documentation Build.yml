@@ -1,11 +1,13 @@
-name: Sphinx Documentation Build
+name: Sphynx Documentation Build
+
 on: [push, pull_request]
 
 jobs:
   docs:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -13,10 +15,10 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Install Dependencies
+      - name: Install documentation dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r docs/requirements.txt  
+          pip install -r requirements-dev.txt
 
       - name: Build Documentation
         run: |
@@ -27,5 +29,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: documentation
-          path: docs/_build/html
-
+          path: docs/build/html
