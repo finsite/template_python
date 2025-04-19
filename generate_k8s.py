@@ -1,25 +1,31 @@
 import os
-import sys
+import subprocess
+import shutil
 
 def create_directory(path):
-    """Create a directory if it does not exist."""
     os.makedirs(path, exist_ok=True)
 
-def generate_helm_chart(app_name, repo_path):
-    """Generate a Helm chart for the application."""
-    helm_path = os.path.join(repo_path, "charts", app_name)
-    create_directory(helm_path)
-    create_directory(os.path.join(helm_path, "templates"))
+def get_app_name():
+    return os.path.basename(os.getcwd())
 
-    chart_yaml = f"""\
+def write_file(path, content):
+    create_directory(os.path.dirname(path))
+    with open(path, "w", newline="\n") as f:
+        f.write(content.strip() + "\n")
+
+def generate_all_templates(app_name):
+    files = {
+        f"charts/{app_name}/Chart.yaml": f"""\
+---
 apiVersion: v2
 name: {app_name}
 description: A Helm chart for {app_name}
 type: application
 version: 0.1.0
 appVersion: "1.0"
-"""
-    values_yaml = f"""\
+""",
+        f"charts/{app_name}/values.yaml": f"""\
+---
 replicaCount: 1
 
 image:
@@ -30,44 +36,33 @@ image:
 service:
   type: ClusterIP
   port: 8080
-"""
-    deployment_yaml = f"""\
+""",
+        f"charts/{app_name}/templates/deployment.yaml": """\
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {app_name}
+  name: {{.Chart.Name}}
   labels:
-    app: {app_name}
+    app: {{.Chart.Name}}
 spec:
-  replicas: {{ {{ .Values.replicaCount }} }}
+  replicas: {{.Values.replicaCount}}
   selector:
     matchLabels:
-      app: {app_name}
+      app: {{.Chart.Name}}
   template:
     metadata:
       labels:
-        app: {app_name}
+        app: {{.Chart.Name}}
     spec:
       containers:
-      - name: {app_name}
-        image: "{{ {{ .Values.image.repository }} }}:{{ {{ .Values.image.tag }} }}"
-        ports:
-        - containerPort: 8080
-"""
-
-    with open(os.path.join(helm_path, "Chart.yaml"), "w") as f:
-        f.write(chart_yaml)
-    with open(os.path.join(helm_path, "values.yaml"), "w") as f:
-        f.write(values_yaml)
-    with open(os.path.join(helm_path, "templates", "deployment.yaml"), "w") as f:
-        f.write(deployment_yaml)
-
-def generate_kubernetes_manifests(app_name, repo_path):
-    """Generate Kubernetes deployment YAMLs."""
-    k8s_path = os.path.join(repo_path, "k8s", app_name)
-    create_directory(k8s_path)
-
-    deployment_yaml = f"""\
+        - name: {{.Chart.Name}}
+          image: "{{.Values.image.repository}}:{{.Values.image.tag}}"
+          ports:
+            - containerPort: 8080
+""",
+        f"k8s/base/deployment.yaml": f"""\
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -85,13 +80,13 @@ spec:
         app: {app_name}
     spec:
       containers:
-      - name: {app_name}
-        image: {app_name}:latest
-        ports:
-        - containerPort: 8080
-"""
-
-    service_yaml = f"""\
+        - name: {app_name}
+          image: {app_name}:latest
+          ports:
+            - containerPort: 8080
+""",
+        f"k8s/base/service.yaml": f"""\
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -103,55 +98,102 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080
-"""
+""",
+        f"k8s/base/kustomization.yaml": """\
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 
-    with open(os.path.join(k8s_path, "deployment.yaml"), "w") as f:
-        f.write(deployment_yaml)
-    with open(os.path.join(k8s_path, "service.yaml"), "w") as f:
-        f.write(service_yaml)
+resources:
+  - deployment.yaml
+  - service.yaml
+""",
+        f"k8s/overlays/dev/kustomization.yaml": f"""\
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 
-def generate_argocd_manifests(app_name, repo_path):
-    """Generate ArgoCD application manifests."""
-    argocd_path = os.path.join(repo_path, "argocd", app_name)
-    create_directory(argocd_path)
+resources:
+  - ../../base/
 
-    application_yaml = f"""\
+namespace: default
+
+labels:
+  - includeSelectors: true
+    pairs:
+      app: {app_name}
+
+images:
+  - name: {app_name}
+    newName: {app_name}
+    newTag: latest
+
+patchesStrategicMerge:
+  - # patch-deployment.yaml
+""",
+        "k8s/application/application.yaml": f"""\
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {app_name}
   namespace: argocd
 spec:
-  destination:
-    namespace: default
-    server: https://kubernetes.default.svc
+  project: default
   source:
-    repoURL: https://github.com/my-org/{app_name}.git
+    repoURL: https://github.com/your-org/{app_name}.git
+    targetRevision: HEAD
     path: charts/{app_name}
-    targetRevision: main
-    helm:
-      valueFiles:
-        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
+      prune: true
 """
+    }
 
-    with open(os.path.join(argocd_path, "application.yaml"), "w") as f:
-        f.write(application_yaml)
+    for path, content in files.items():
+        write_file(path, content)
+        print(f"✅ Created: {path}")
+
+def run_command_safe(cmd, desc):
+    print(f"\n🔍 {desc}:")
+    try:
+        subprocess.run(cmd, check=True, shell=True)
+    except subprocess.CalledProcessError as e:
+        print(f"⚠️  Command failed: {cmd}\n{e}")
+    except FileNotFoundError:
+        print(f"⚠️  Command not found: {cmd.split()[0]}")
+
+def validate_files(app_name):
+    helm_chart = f"charts/{app_name}"
+    kustomize_path = "k8s/overlays/dev"
+
+    run_command_safe(f"helm lint {helm_chart}", "Helm lint")
+    run_command_safe(f"helm template {helm_chart}", "Helm render")
+    run_command_safe(f"kustomize build {kustomize_path}", "Kustomize build")
+
+    if shutil.which("yamllint"):
+        run_command_safe("yamllint charts/", "YAML lint (charts)")
+        run_command_safe("yamllint k8s/", "YAML lint (k8s)")
+    else:
+        print("ℹ️  yamllint not installed, skipping YAML lint checks")
+
+def main():
+    app_name = get_app_name()
+    print(f"🔧 Generating all manifests for app: {app_name}")
+    generate_all_templates(app_name)
+    validate_files(app_name)
+
+    print("\n✅ All files generated and validated.")
+    print("📦 Structure:")
+    print(" - charts/")
+    print(" - k8s/base/")
+    print(" - k8s/overlays/dev/")
+    print(" - k8s/application/")
+    print("🧪 You can now commit or test with kubectl/ArgoCD.")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python generate_k8s.py <app-name>")
-        sys.exit(1)
-
-    app_name = sys.argv[1]
-    repo_path = os.getcwd()
-
-    generate_helm_chart(app_name, repo_path)
-    generate_kubernetes_manifests(app_name, repo_path)
-    generate_argocd_manifests(app_name, repo_path)
-
-    print(f"✅ All Kubernetes, Helm, and ArgoCD files created for {app_name}.")
-    print("Modify the generated files before deploying.")
+    main()
