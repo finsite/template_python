@@ -5,14 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "template_python"
 version = "0.1.0"
-description = "A Python repository to build other repositories from"
+description = "A template for the default python project"
 readme = "README.md"
 requires-python = ">=3.7"
 license = { text = "MIT" }
 authors = [
   { name = "mark quinn", email = "mobious_99@yahoo.com" }
 ]
-keywords = ["python", "template"]
+keywords = ["python", "stock", "data", "polling"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.7",
