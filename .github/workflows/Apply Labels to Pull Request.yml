@@ -4,7 +4,7 @@ on:
     types: [opened, edited, synchronize]
   
 jobs:
-  label:
+  apply-labels-to-pull-request:
     name: Apply Labels to Pull Request
     runs-on: ubuntu-latest
     permissions:
