@@ -1,6 +1,5 @@
 ## Changelog
 
-- Fixing workflows and dependancies (Mark Quinn)
-- Fixing workflows and dependancies (Mark Quinn)
-- Create bandit.yml (Mark)
+- Merge branch 'main' of https://github.com/finsite/template_python (Mark Quinn)
+- Fixing requirements version dependancies (Mark Quinn)
 - bump: patch version + changelog [skip ci] (github-actions[bot])
