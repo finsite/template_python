@@ -13,12 +13,10 @@ pytest-mock==3.14.0          # Mocking/stubbing dependencies in tests
 flake8==7.2.0                # Traditional linter
 flake8-docstrings==1.7.0     # Enforce docstring conventions (PEP257)
 pylint==3.3.6                # Deeper code analysis
-mypy==1.15.0                  # Static type checking
+mypy==1.15.0                 # Static type checking
 black==25.1.0                # Code formatter
-isort==6.0.1                # Import sorter
-
-# Modern replacement for flake8 + black + isort
-ruff==0.11.6                  # Fast all-in-one linter/formatter (CI-friendly)
+isort==6.0.1                 # Import sorter
+ruff==0.11.6                 # Fast all-in-one linter/formatter (CI-friendly)
 
 # ======================
 # Code complexity
@@ -28,25 +26,25 @@ xenon==0.9.3                 # Enforce maximum code complexity
 # ======================
 # Security tools
 # ======================
-bandit==1.8.3                # Scans for security issues in Python code
-safety==3.3.1               # Checks dependencies for known vulnerabilities
+bandit==1.8.3                # Scan for security issues
+safety==3.3.1                # Check dependency vulnerabilities
 
 # ======================
 # Documentation tools
 # ======================
-sphinx>=7.0,<8.0                        # Python documentation generator
-sphinx-rtd-theme==3.0.2                 # ReadTheDocs theme
-furo>=2023.9.10                         # Alternative modern responsive theme
-myst-parser==2.0.0                      # ✅ Required for Markdown (.md) support
-sphinx-autodoc-typehints<2.1            # Display type hints in docstrings
-doc8==1.1.2                             # Validates .rst and Sphinx doc files (optional)
+sphinx>=7.0,<8.0             # Documentation generator
+sphinx-rtd-theme==3.0.2      # ReadTheDocs theme
+furo>=2023.9.10              # Alternative modern responsive theme
+myst-parser==2.0.0           # Markdown (.md) support for Sphinx
+sphinx-autodoc-typehints<2.1 # Type hints display in Sphinx
+doc8==1.1.2                  # Validate .rst and .md files
 
 # ======================
 # Build & Packaging
 # ======================
 build==1.2.2.post1           # Build Python packages (PEP 517)
 twine==6.1.0                 # Publish to PyPI
-bump-my-version==1.1.2      # Automated version bumping
+bump-my-version==1.1.2       # Automated version bumping
 
 # ======================
 # Git & Dev tooling
@@ -54,12 +52,7 @@ bump-my-version==1.1.2      # Automated version bumping
 pre-commit==4.2.0            # Git hook manager
 
 # ======================
-# Docker (optional)
-# ======================
-#hadolint==1.2.1 
-
-# ======================
-# Type stubs for common packages (used with mypy)
+# Type stubs for mypy (common packages)
 # ======================
 types-requests==2.32.0.20250328
 types-python-dateutil==2.9.0.20241206
