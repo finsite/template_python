@@ -35,12 +35,6 @@ safety==3.3.1                # Check dependency vulnerabilities
 # ======================
 # Documentation tools
 # ======================
-sphinx>=7.0,<8.0             # Documentation generator
-sphinx-rtd-theme==3.0.2      # ReadTheDocs theme
-furo>=2023.9.10              # Alternative modern responsive theme
-myst-parser==2.0.0           # Markdown (.md) support for Sphinx
-sphinx-autodoc-typehints<2.1 # Type hints display in Sphinx
-doc8==1.1.2                  # Validate .rst and .md files
 
 # ======================
 # Build & Packaging
