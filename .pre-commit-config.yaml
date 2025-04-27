@@ -154,3 +154,29 @@ repos:
   #   rev: 6.3.0
   #   hooks:
   #     - id: pydocstyle
+
+  - repo: https://github.com/fpgmaas/deptry.git
+    rev: "0.23.0"
+    hooks:
+      - id: deptry
+        args: ["--ignore", "DEP001"]
+
+  - repo: local
+    hooks:
+      - id: auto-pip-compile
+        name: Auto compile and add requirements.txt
+        language: system
+        entry: >
+          sh -c "
+            if [ -f requirements.in ]; then
+              echo '📦 Recompiling requirements.txt from requirements.in';
+              pip-compile --upgrade requirements.in;
+              git add requirements.txt;
+            fi;
+            if [ -f requirements-dev.in ]; then
+              echo '📦 Recompiling requirements-dev.txt from requirements-dev.in';
+              pip-compile --upgrade requirements-dev.in;
+              git add requirements-dev.txt;
+            fi
+          "
+        files: ^requirements(-dev)?\.in$
