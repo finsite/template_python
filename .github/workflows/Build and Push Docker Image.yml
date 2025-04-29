@@ -24,7 +24,7 @@ jobs:
           VERSION=$(grep '^current_version' pyproject.toml | head -n 1 | cut -d '"' -f2)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Build and push Docker image
-        run: |
+        run: |-
           docker buildx build \
             --push \
             --tag ghcr.io/${{ github.repository }}:latest \
