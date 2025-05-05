@@ -1,15 +1,16 @@
----
 name: cz_conventional_commits
 version: 0.1.0
 tag_format: v$version
 update_changelog_on_bump: true
 changelog_file: CHANGELOG.md
 commit_parser: cz.conventional_commits
+
 info:
   title: Conventional Commits
   description: Standardized commit format across stock-* repos
   message: 'Write your commit message using the prompts below:'
-  example: 'feat(stock-tech-ema): add crossover alert logic'
+  example: 'feat(queue): support fallback from SQS to RabbitMQ'
+
   types:
     - type: feat
       description: A new feature
@@ -38,65 +39,29 @@ info:
     - type: build
       description: Changes to packaging/build system
       emoji: 📦
+
   scopes:
-    # 🧠 Technical Analysis
-    - name: stock-tech-candlestick
-    - name: stock-tech-movavg
-    - name: stock-tech-ichimoku
-    - name: stock-tech-momentum
-    - name: stock-tech-fib
-    - name: stock-tech-trend
-    - name: stock-tech-volatility
-    - name: stock-tech-patterns
-    - name: stock_data_poller
+    # 🧠 Core Logic
+    - pollers
+    - config
+    - vault
+    - queue
+    - main
+    - metrics
 
-    # 💬 Sentiment Analysis
-    - name: stock-sent-news
-    - name: stock-sent-social
-    - name: stock-sent-earnings
-    - name: stock-sent-analyst
-    - name: stock-sent-sec
-    - name: sentiment_data_poller
+    # 🧪 Quality
+    - tests
+    - lint
+    - types
 
-    # 📊 Quantitative Analysis
-    - name: stock-quant-prediction
-    - name: stock-quant-arbitrage
-    - name: stock-quant-stat
-    - name: stock-quant-risk
-    - name: stock-quant-factor
+    # 🛠 Build & CI/CD
+    - ci
+    - docker
+    - deps
+    - docs
+    - versioning
 
-    # 🧾 Fundamental Analysis
-    - name: stock-fund-earnings
-    - name: stock-fund-macro
-    - name: stock-fund-valuation
-    - name: stock-fund-insider
-    - name: stock-fund-dividends
-
-    # 🌐 Alternative Data
-    - name: stock-alt-web
-    - name: stock-alt-geolocation
-    - name: stock-alt-supplychain
-    - name: stock-alt-options
-    - name: stock-alt-sentiment
-
-    # 🔁 Backtesting & Execution
-    - name: stock-backtest-engine
-    - name: stock-backtest-strategies
-    - name: stock-backtest-ml
-    - name: stock-backtest-reinforcement
-    - name: stock-backtest-execution
-
-    # 📥 Data Collection & Processing
-    - name: stock-data-collector
-    - name: stock-data-cleaning
-    - name: stock-data-stream
-    - name: stock-data-storage
-
-    # Shared infra/tooling
-    - name: config
-    - name: vault
-    - name: queue
-    - name: docker
-    - name: ci
-    - name: tests
-    - name: docs
+    # 📁 Repo / Template Maintenance
+    - template
+    - init
+    - release
