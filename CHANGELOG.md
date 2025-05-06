@@ -4,6 +4,12 @@
 - Added pylintrc (Mark Quinn)
 - bump: patch version + changelog [skip ci] (github-actions[bot])
 
+## v0.2.1 (2025-05-06)
+
+### Fix
+
+- **docs**: Fix pre-commit and some other minor errors in workflows
+
 ## v0.2.0 (2025-05-05)
 
 ### Feat
