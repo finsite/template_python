@@ -96,7 +96,6 @@
 #         entry: pip check
 #         language: system
 #         pass_filenames: false
-
 #   # ✅ Docker and Shell Scripts
 #   # - repo: https://github.com/hadolint/hadolint
 #   #   rev: v2.13.1-beta
