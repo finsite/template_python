@@ -139,7 +139,6 @@
 #         entry: cz changelog --dry-run
 #         language: system
 #         stages: [pre-push]
-
 #   # ✅ Run Tests
 #   # - repo: local
 #   #   hooks:

@@ -5,8 +5,7 @@ import sys
 
 
 def create_directory(path: str) -> None:
-    """
-    Creates a directory at the given path if it does not already exist.
+    """Creates a directory at the given path if it does not already exist.
 
     :param path: The path to the directory to create.
     """
@@ -14,8 +13,7 @@ def create_directory(path: str) -> None:
 
 
 def write_file(path, content):
-    """
-    Writes content to a file at the specified path, creating directories if necessary.
+    """Writes content to a file at the specified path, creating directories if necessary.
 
     :param path: The file path where the content should be written.
     :param content: The content to write into the file.
@@ -30,8 +28,7 @@ def write_file(path, content):
 
 
 def get_app_name():
-    """
-    Returns the app name from the current directory name.
+    """Returns the app name from the current directory name.
 
     Example: If the current directory name is "myapp", this function will return "myapp".
     """
@@ -39,8 +36,7 @@ def get_app_name():
 
 
 def generate_all_templates(app_name):
-    """
-    Generates all necessary YAML configuration files for Kubernetes and Helm
+    """Generates all necessary YAML configuration files for Kubernetes and Helm
     deployments.
 
     :param app_name: Name of the application, used in file paths and content.
