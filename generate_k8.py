@@ -13,7 +13,8 @@ def create_directory(path: str) -> None:
 
 
 def write_file(path, content):
-    """Writes content to a file at the specified path, creating directories if necessary.
+    """Writes content to a file at the specified path, creating directories if
+    necessary.
 
     :param path: The file path where the content should be written.
     :param content: The content to write into the file.
@@ -39,7 +40,8 @@ def generate_all_templates(app_name):
     """Generates all necessary YAML configuration files for Kubernetes and Helm
     deployments.
 
-    :param app_name: Name of the application, used in file paths and content.
+    :param app_name: Name of the application, used in file paths and
+        content.
     """
     files = {
         f"charts/{app_name}/Chart.yaml": f"""
