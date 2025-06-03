@@ -2,9 +2,13 @@
 
 ## Overview
 
-This repository provides a standardized template for building Python-based microservices and utilities. It includes preconfigured tooling for testing, linting, formatting, dependency management, Dockerization, and Kubernetes scaffolding.
+This repository provides a standardized template for building Python-based
+microservices and utilities. It includes preconfigured tooling for testing,
+linting, formatting, dependency management, Dockerization, and Kubernetes
+scaffolding.
 
-Use this template to quickly bootstrap new repositories in the `stock-*` ecosystem or any production-grade Python project.
+Use this template to quickly bootstrap new repositories in the `stock-*`
+ecosystem or any production-grade Python project.
 
 ---
 
@@ -92,6 +96,4 @@ Inspired by best practices in production-grade Python development, GitOps, and D
 yaml
 Copy
 Edit
-
-
-
+```

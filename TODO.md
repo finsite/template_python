@@ -1,6 +1,8 @@
 # 📌 Project TODO: Template Python Repository
 
-This TODO list outlines enhancements and checks to ensure all repositories derived from `template_python` are production-grade, maintainable, and GitOps-ready.
+This TODO list outlines enhancements and checks to ensure all repositories
+derived from `template_python` are production-grade, maintainable, and
+GitOps-ready.
 
 ---
 
