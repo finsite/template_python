@@ -1,5 +1,4 @@
-"""
-template_python
+"""template_python
 
 This module serves as a template for Python-based repositories.
 """

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import shutil
 import subprocess
@@ -5,44 +7,26 @@ import sys
 
 
 def create_directory(path: str) -> None:
-    """Creates a directory at the given path if it does not already exist.
-
-    :param path: The path to the directory to create.
-    """
+    """Creates a directory at the given path if it does not already exist."""
     os.makedirs(path, exist_ok=True)
 
 
-def write_file(path, content):
-    """Writes content to a file at the specified path, creating directories if
-    necessary.
-
-    :param path: The file path where the content should be written.
-    :param content: The content to write into the file.
-    """
-    # Ensure the directory for the file exists
+def write_file(path: str, content: str) -> None:
+    """Writes content to a file, creating directories if necessary. Warns if overwriting."""
     create_directory(os.path.dirname(path))
-
-    # Open the file in write mode and ensure newline characters are consistent
+    if os.path.exists(path):
+        print(f"⚠️  Overwriting existing file: {path}")
     with open(path, "w", newline="\n") as f:
-        # Write the stripped content to the file, appending a newline
         f.write(content.strip() + "\n")
 
 
-def get_app_name():
-    """Returns the app name from the current directory name.
-
-    Example: If the current directory name is "myapp", this function will return "myapp".
-    """
+def get_app_name() -> str:
+    """Returns the app name from the current directory."""
     return os.path.basename(os.getcwd())
 
 
-def generate_all_templates(app_name):
-    """Generates all necessary YAML configuration files for Kubernetes and Helm
-    deployments.
-
-    :param app_name: Name of the application, used in file paths and
-        content.
-    """
+def generate_all_templates(app_name: str) -> None:
+    """Generates Helm, K8s, and ArgoCD manifests for the app."""
     files = {
         f"charts/{app_name}/Chart.yaml": f"""
 ---
@@ -183,13 +167,12 @@ spec:
 """,
     }
 
-    # Iterate over the files dictionary and create each file
     for path, content in files.items():
         write_file(path, content)
         print(f"✅ Created: {path}")
 
 
-def run_command_safe(cmd, desc):
+def run_command_safe(cmd: str, desc: str) -> None:
     print(f"\n🔍 {desc}:")
     try:
         subprocess.run(cmd, check=True, shell=True)
@@ -199,7 +182,7 @@ def run_command_safe(cmd, desc):
         print(f"⚠️  Command not found: {cmd.split()[0]}")
 
 
-def validate_files(app_name):
+def validate_files(app_name: str) -> None:
     helm_chart = f"charts/{app_name}"
     kustomize_path = "k8s/overlays/dev"
 
@@ -214,17 +197,21 @@ def validate_files(app_name):
         print("ℹ️  yamllint not installed, skipping YAML lint checks")
 
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python generate_k8s.py <app-name>")
+def main() -> None:
+    if len(sys.argv) < 2:
+        print("Usage: python generate_k8.py <app-name> [--skip-validate]")
         sys.exit(1)
 
     app_name = sys.argv[1]
+    skip_validate = "--skip-validate" in sys.argv
+
     print(f"\n🔧 Generating all manifests for app: {app_name}")
     generate_all_templates(app_name)
-    validate_files(app_name)
 
-    print("\n✅ All files generated and validated.")
+    if not skip_validate:
+        validate_files(app_name)
+
+    print("\n✅ All files generated." if skip_validate else "\n✅ All files generated and validated.")
     print("📦 Structure:")
     print(" - charts/")
     print(" - k8s/base/")
