@@ -1,72 +1,97 @@
-# Template
+# 🧱 template_python
 
 ## Overview
 
-This is a generic template for a Python application. Please update the details
-as necessary to fit your project.
+This repository provides a standardized template for building Python-based microservices and utilities. It includes preconfigured tooling for testing, linting, formatting, dependency management, Dockerization, and Kubernetes scaffolding.
 
-## Getting Started
+Use this template to quickly bootstrap new repositories in the `stock-*` ecosystem or any production-grade Python project.
 
-Provide a brief description of the application and its purpose.
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-List any prerequisites needed to run the application.
+- Python 3.9 or higher
+- `make`
+- `pip` and `pip-tools`
+- Optional: Docker, kubectl, and helm (for deployment)
 
-```markdown
-Each script supports error logging by default. This feature is optional and can
-be enabled for debugging purposes.
+### 🔧 Setup
 
-Example files are included with each script. Use the command
-`get-help <scriptname>` to view examples.
-```
+```bash
+git clone https://github.com/your-org/your-repo.git
+cd your-repo
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+make install
+⚙️ Environment Variables
+Define required environment variables in your config module or via Vault. This template does not rely on .env files by default.
 
-## Installation
+Optional: Use Vault, AWS SSM, or environment injection for secure configuration.
 
-1. Clone the repository.
-2. Set up a virtual environment:
+🧪 Running Tests
+Run unit tests and type checks using:
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+bash
+Copy
+Edit
+make test        # Runs pytest
+make lint        # Runs ruff and mypy
+make format      # Auto-formats code with ruff
+All tools are pre-configured via pyproject.toml and pre-commit.
 
-   ```
+🐳 Docker Support
+This template includes a minimal Dockerfile to containerize the application:
 
-## Environment Variables
+bash
+Copy
+Edit
+docker build -t your-service .
+docker run --rm your-service
+☸️ Kubernetes & GitOps
+A k8s/ folder is provided for ArgoCD-compatible Kubernetes manifests. These can be customized for:
 
-Define any necessary environment variables for the application:
+Deployments or Jobs
 
-## Example .env File
+ConfigMaps and Secrets
 
-Provide an example `.env` file to illustrate environment variable configuration.
+Role-based service accounts
 
-## Running the Tests
+Helm or Kustomize overlays
 
-Explain how to execute the tests for the application.
+🧰 Built With
+Python
 
-## Deployment
+Ruff – Linting & formatting
 
-Document the deployment process, including any required parameters and
-instructions.
+Mypy – Static type checking
 
-## Built With
+Pytest – Testing
 
-- [Visual Studio Code](https://code.visualstudio.com/)
+pip-tools – Dependency locking
 
-## Contributing
+Docker – Containerization
 
-Contributions are welcome! Please feel free to submit issues or pull requests
-for improvements.
+pre-commit – Git hook automation
 
-## Authors
+🤝 Contributing
+Contributions are welcome! Please submit issues or pull requests to improve this template.
 
-- **Mark Quinn** - [Mobious999](https://github.com/mobious999)
-- **Jason Qualkenbush** - [jasonqualkenbush](https://github.com/CosmicQ)
+👤 Authors
+Mark Quinn – @mobious999
 
-## License
+Jason Qualkenbush – @CosmicQ
 
-This project is licensed under the Apache 2.0 License.
+📄 License
+Licensed under the Apache License 2.0.
 
-## Acknowledgments
+🙏 Acknowledgments
+Inspired by best practices in production-grade Python development, GitOps, and DevSecOps tooling. Special thanks to the open source community.
 
-Include any references or acknowledgments here.
+yaml
+Copy
+Edit
+
+
+
