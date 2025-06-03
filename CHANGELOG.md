@@ -4,6 +4,12 @@
 - Added pylintrc (Mark Quinn)
 - bump: patch version + changelog [skip ci] (github-actions[bot])
 
+## v0.2.10 (2025-06-03)
+
+### Fix
+
+- **template**: update template_python to correct licensing
+
 ## v0.2.9 (2025-06-03)
 
 ### Fix
