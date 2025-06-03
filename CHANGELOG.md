@@ -4,6 +4,12 @@
 - Added pylintrc (Mark Quinn)
 - bump: patch version + changelog [skip ci] (github-actions[bot])
 
+## v0.2.14 (2025-06-03)
+
+### Fix
+
+- **files**: Add Initialize Repository Files post cloning generation
+
 ## v0.2.13 (2025-06-03)
 
 ### Fix
