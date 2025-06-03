@@ -4,6 +4,12 @@
 - Added pylintrc (Mark Quinn)
 - bump: patch version + changelog [skip ci] (github-actions[bot])
 
+## v0.2.9 (2025-06-03)
+
+### Fix
+
+- **poller**: update missing dependancies
+
 ## v0.2.8 (2025-06-03)
 
 ### Fix
