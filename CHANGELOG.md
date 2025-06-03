@@ -4,6 +4,12 @@
 - Added pylintrc (Mark Quinn)
 - bump: patch version + changelog [skip ci] (github-actions[bot])
 
+## v0.2.12 (2025-06-03)
+
+### Fix
+
+- **deps**: standardize termcolor to 2.5.0
+
 ## v0.2.11 (2025-06-03)
 
 ### Fix
