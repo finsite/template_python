@@ -133,3 +133,26 @@ GitOps-ready.
   - [ ] Update metadata in `pyproject.toml`
   - [ ] Customize README and LICENSE
 - [ ] Optionally include `init.sh` or checklist script for first-time setup
+
+Here's the updated section for your `TODO.md` in `template_python` (or
+equivalent), under a new **Security & Compliance Workflows** heading:
+
+---
+
+### 🛡️ Security & Compliance Workflows
+
+- [ ] Templatize `security.yml` GitHub Action:
+
+  - [ ] Include `bandit` by default
+  - [ ] Optional: comment-in support for `safety`, `syft`, `semgrep`, `cosign`
+  - [ ] Ensure it uses stable Python version (e.g. `3.11`)
+  - [ ] Target `src/` or appropriate directory
+
+- [ ] Create `scripts/copy-security-workflow.sh` to assist with rollout
+- [ ] Document checklist for verifying workflow before applying to other repos
+- [ ] Add SBOM and signature tooling (e.g., `syft`, `cosign`) to future-ready
+      projects
+- [ ] Include pre-commit or CI check to ensure the security workflow is present
+      in derived repositories
+
+---
