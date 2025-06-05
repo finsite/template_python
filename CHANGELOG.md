@@ -4,6 +4,12 @@
 - Added pylintrc (Mark Quinn)
 - bump: patch version + changelog [skip ci] (github-actions[bot])
 
+## v0.2.15 (2025-06-05)
+
+### Fix
+
+- **files**: Verify functionality
+
 ## v0.2.14 (2025-06-03)
 
 ### Fix
