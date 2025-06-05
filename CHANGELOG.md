@@ -4,6 +4,12 @@
 - Added pylintrc (Mark Quinn)
 - bump: patch version + changelog [skip ci] (github-actions[bot])
 
+## v0.2.17 (2025-06-05)
+
+### Fix
+
+- **deps**: recompile requirements to resolve dependency conflicts
+
 ## v0.2.16 (2025-06-05)
 
 ### Fix
