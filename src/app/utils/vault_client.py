@@ -116,6 +116,6 @@ class VaultClient:
         Returns:
             The secret value, or the default if not found.
 
-        """        
+        """
         # Retrieve the secret value from the dictionary, defaulting if not found
         return self.secrets.get(key, default)
