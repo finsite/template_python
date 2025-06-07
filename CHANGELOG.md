@@ -1,8 +1,4 @@
-# Changelog
-
-- Merge branch 'main' of https://github.com/finsite/template_python (Mark Quinn)
-- Added pylintrc (Mark Quinn)
-- bump: patch version + changelog [skip ci] (github-actions[bot])
+## v0.1.0 (2025-06-05)
 
 ## v0.2.17 (2025-06-05)
 
@@ -37,74 +33,68 @@
 
 ## v0.2.12 (2025-06-03)
 
-### Fix
-
-- **deps**: standardize termcolor to 2.5.0
-
 ## v0.2.11 (2025-06-03)
 
 ### Fix
 
-- **files**: Cleanup redundant files and standardize
+- **deps**: standardize termcolor to 2.5.0
 
 ## v0.2.10 (2025-06-03)
 
 ### Fix
 
-- **template**: update template_python to correct licensing
+- **files**: Cleanup redundant files and standardize
 
 ## v0.2.9 (2025-06-03)
 
 ### Fix
 
-- **poller**: update missing dependancies
+- **template**: update template_python to correct licensing
 
 ## v0.2.8 (2025-06-03)
 
 ### Fix
 
-- **files**: Removed template python files no longer used
+- **poller**: update missing dependancies
 
 ## v0.2.7 (2025-06-03)
 
 ### Fix
 
-- **documentation**: Updating Readme
+- **files**: Removed template python files no longer used
 
 ## v0.2.6 (2025-05-08)
 
 ### Fix
 
-- **docs**: Running docformatter to fix repos
+- **documentation**: Updating Readme
 
 ## v0.2.5 (2025-05-08)
 
 ### Fix
 
+- **docs**: Running docformatter to fix repos
 - **test**: Disable pytest performance benchmark
 
 ## v0.2.4 (2025-05-07)
-
-### Fix
-
-- **lint**: Fix pre-commit and disable pytest workflow
 
 ## v0.2.3 (2025-05-07)
 
 ### Fix
 
-- **template**: Address issue with renovate keeps opening up the same ticket
+- **lint**: Fix pre-commit and disable pytest workflow
 
 ## v0.2.2 (2025-05-07)
 
 ### Fix
 
-- **docker**: Fix workflow not getting version
+- **template**: Address issue with renovate keeps opening up the same ticket
 
 ## v0.2.1 (2025-05-06)
 
 ### Fix
 
+- **docker**: Fix workflow not getting version
 - **docs**: Fix pre-commit and some other minor errors in workflows
 
 ## v0.2.0 (2025-05-05)
