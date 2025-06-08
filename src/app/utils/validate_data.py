@@ -208,6 +208,8 @@ def _validate_timestamp(timestamp: Any) -> bool:
     """
     # Ensure the timestamp is a string
     if not isinstance(timestamp, str):
-        logger.error(f"Invalid timestamp format: {timestamp}")  # Log an error if validation fails
+        logger.error(
+            f"Invalid timestamp format: {timestamp}"
+        )  # Log an error if validation fails
         return False
     return True  # Return True if the timestamp is valid

@@ -74,9 +74,7 @@ def track_request_metrics(
 
     """
     status = "success" if success else "failure"
-    message = (
-        f"Request for symbol '{symbol}' {status}. Rate limit: {rate_limit} req/{time_window}s."
-    )
+    message = f"Request for symbol '{symbol}' {status}. Rate limit: {rate_limit} req/{time_window}s."
 
     if success:
         logger.info(message)

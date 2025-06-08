@@ -32,7 +32,9 @@ class VaultClient:
     def _authenticate(self) -> None:
         """Authenticate to Vault using AppRole credentials from the environment."""
         if not self.role_id or not self.secret_id:
-            logger.warning("🔐 VAULT_ROLE_ID or VAULT_SECRET_ID not set — skipping Vault load.")
+            logger.warning(
+                "🔐 VAULT_ROLE_ID or VAULT_SECRET_ID not set — skipping Vault load."
+            )
             return
 
         for attempt in range(3):

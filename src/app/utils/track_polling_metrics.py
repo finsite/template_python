@@ -13,7 +13,9 @@ from app.utils.setup_logger import setup_logger
 logger = setup_logger(__name__)
 
 
-def track_polling_metrics(status: Literal["success", "failure"], source: str, symbol: str) -> None:
+def track_polling_metrics(
+    status: Literal["success", "failure"], source: str, symbol: str
+) -> None:
     """Tracks metrics for polling operations.
 
     Args:

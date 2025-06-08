@@ -98,7 +98,9 @@ class RateLimiter:
 
             # If the rate limit is reached, wait for some time
             if self._tokens < 1:
-                sleep_time: float = (1 - self._tokens) * (self._time_window / self._max_requests)
+                sleep_time: float = (1 - self._tokens) * (
+                    self._time_window / self._max_requests
+                )
                 logger.info(
                     f"[{context}] Rate limit reached. Sleeping for {sleep_time:.2f} seconds."
                 )
@@ -107,4 +109,6 @@ class RateLimiter:
 
             # Consume a token and log the remaining tokens
             self._tokens -= 1
-            logger.debug(f"[{context}] Consumed a token. Remaining tokens: {self._tokens:.2f}")
+            logger.debug(
+                f"[{context}] Consumed a token. Remaining tokens: {self._tokens:.2f}"
+            )
