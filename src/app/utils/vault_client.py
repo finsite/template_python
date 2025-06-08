@@ -10,6 +10,8 @@ import hvac
 
 from app.utils.setup_logger import setup_logger
 
+__all__ = ["VaultClient", "get_secret_or_env"]
+
 logger = setup_logger(__name__)
 
 
@@ -32,9 +34,7 @@ class VaultClient:
     def _authenticate(self) -> None:
         """Authenticate to Vault using AppRole credentials from the environment."""
         if not self.role_id or not self.secret_id:
-            logger.warning(
-                "🔐 VAULT_ROLE_ID or VAULT_SECRET_ID not set — skipping Vault load."
-            )
+            logger.warning("🔐 VAULT_ROLE_ID or VAULT_SECRET_ID not set — skipping Vault load.")
             return
 
         for attempt in range(3):
@@ -62,7 +62,7 @@ class VaultClient:
             self.secrets = response["data"]["data"]
             logger.info(f"📦 Loaded {len(self.secrets)} secrets from Vault.")
         except Exception as e:
-            logger.warning(f"❌ Failed to load secrets from Vault: %s", e)
+            logger.warning("❌ Failed to load secrets from Vault: %s", e)
             self.secrets = {}
 
     def get(self, key: str, default: str | None = None) -> str | None:
@@ -76,3 +76,23 @@ class VaultClient:
             The secret value or the default.
         """
         return self.secrets.get(key, default)
+
+
+_vault_client: VaultClient | None = None
+
+
+def get_secret_or_env(key: str, default: str = "") -> str:
+    """Return the secret from Vault or fall back to environment variable.
+
+    Args:
+        key: The secret key to retrieve.
+        default: Fallback value if not found.
+
+    Returns:
+        The secret value or the fallback/default.
+    """
+    global _vault_client
+    if _vault_client is None:
+        _vault_client = VaultClient()
+
+    return _vault_client.get(key, os.getenv(key, default)) or default

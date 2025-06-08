@@ -49,9 +49,7 @@ def validate_environment_variables(required_variables: list[str]) -> None:
         raise TypeError("required_variables must be a list of strings.")
 
     # Check for missing environment variables
-    missing_variables = [
-        variable for variable in required_variables if not os.getenv(variable)
-    ]
+    missing_variables = [variable for variable in required_variables if not os.getenv(variable)]
 
     # Log and raise an error if any variables are missing
     if missing_variables:
