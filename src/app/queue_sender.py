@@ -1,9 +1,9 @@
 """Module to publish processed data to RabbitMQ or AWS SQS.
 
-This module provides a function to publish a list of processed
-data dictionaries to the appropriate queue type (RabbitMQ or SQS),
-based on shared configuration. Each message is retried with exponential
-backoff upon failure.
+This module provides a function to publish a list of processed data
+dictionaries to the appropriate queue type (RabbitMQ or SQS), based on
+shared configuration. Each message is retried with exponential backoff
+upon failure.
 """
 
 import json
@@ -75,9 +75,9 @@ def _send_to_rabbitmq(data: dict[str, Any]) -> None:
             channel.basic_publish(
                 exchange=config_shared.get_rabbitmq_exchange(),
                 routing_key=config_shared.get_rabbitmq_routing_key(),
-                body=json.dumps(data),
+                body=json.dumps(data, ensure_ascii=False),
             )
-        logger.info("✅ Published message to RabbitMQ")
+        logger.info("✅ Published message to RabbitMQ.")
     except AMQPConnectionError as e:
         logger.exception("❌ RabbitMQ publish connection error: %s", e)
         raise
@@ -112,7 +112,7 @@ def _send_to_sqs(data: dict[str, Any]) -> None:
         sqs_client = boto3.client("sqs", region_name=region)
         response = sqs_client.send_message(
             QueueUrl=sqs_url,
-            MessageBody=json.dumps(data),
+            MessageBody=json.dumps(data, ensure_ascii=False),
         )
         logger.info("✅ Published message to SQS (MessageId: %s)", response.get("MessageId"))
     except (BotoCoreError, NoCredentialsError) as e:
