@@ -1,5 +1,7 @@
-"""template_python
+"""repo-utils-shared.
 
-Auto-generated init file with version."""
+Shared utility modules and configuration scaffolding for all
+repositories.
+"""
 
-__version__ = "0.2.9"
+__version__ = "0.4.0"
