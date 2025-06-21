@@ -1,3 +1,9 @@
+## v0.5.3 (2025-06-21)
+
+### Fix
+
+- address security vulnerablities urllib
+
 ## v0.5.2 (2025-06-21)
 
 ### Fix
