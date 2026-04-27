@@ -280,7 +280,7 @@ python-dateutil==2.9.0.post0
     #   ghp-import
     #   matplotlib
     #   pandas
-python-dotenv==1.1.0
+python-dotenv==1.2.2
     # via
     #   -r D:\git\template_python\requirements.in
     #   pydantic-settings
