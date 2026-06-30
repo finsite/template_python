@@ -4,7 +4,7 @@
 # ======================
 # Core testing tools
 # ======================
-pytest==8.3.5                # Unit and integration testing
+pytest==9.0.3                # Unit and integration testing
 pytest-cov==6.1.1            # Coverage reporting
 pytest-benchmark==5.1.0      # Performance benchmarking
 pytest-html==4.1.1           # Optional: HTML test reports
@@ -17,7 +17,7 @@ flake8==7.2.0                # Traditional linter
 flake8-docstrings==1.7.0     # Enforce docstring conventions (PEP257)
 pylint==3.3.6                # Deeper code analysis
 mypy==1.15.0                 # Static type checking
-black==25.1.0                # Code formatter
+black==26.3.1                # Code formatter
 isort==6.0.1                 # Import sorter
 ruff==0.11.6                 # Fast all-in-one linter/formatter (CI-friendly)
 
