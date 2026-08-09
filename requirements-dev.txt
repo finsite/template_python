@@ -250,7 +250,7 @@ pygments==2.19.2
     #   rich
 pylint==3.3.6
     # via -r requirements-dev.in
-pymdown-extensions==10.16
+pymdown-extensions==11.0.1
     # via mkdocs-material
 pyparsing==3.2.3
     # via matplotlib
