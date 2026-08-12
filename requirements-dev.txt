@@ -4,46 +4,46 @@
 #
 #    pip-compile requirements-dev.in
 #
-annotated-types==0.7.0
+annotated-types==0.8.0
     # via pydantic
-anyio==4.9.0
+anyio==4.14.2
     # via httpx
-argcomplete==3.6.2
+argcomplete==3.7.2
     # via commitizen
-astroid==3.3.10
+astroid==3.3.11
     # via pylint
-babel==2.17.0
+babel==2.18.0
     # via mkdocs-material
-backrefs==5.8
+backrefs==5.9
     # via mkdocs-material
-bandit==1.8.3
+bandit==1.9.4
     # via -r requirements-dev.in
 black==25.1.0
     # via -r requirements-dev.in
-boto3==1.38.41
+boto3==1.43.69
     # via -r D:\git\template_python\requirements.in
-botocore==1.38.41
+botocore==1.43.69
     # via
     #   boto3
     #   s3transfer
-bracex==2.5.post1
+bracex==2.7
     # via wcmatch
-build==1.2.2.post1
+build==1.5.0
     # via -r requirements-dev.in
-bump-my-version==1.1.2
+bump-my-version==1.5.1
     # via -r requirements-dev.in
-certifi==2025.6.15
+certifi==2025.11.12
     # via
     #   httpcore
     #   httpx
     #   requests
-cfgv==3.4.0
+cfgv==3.5.0
     # via pre-commit
-charset-normalizer==3.4.2
+charset-normalizer==3.4.9
     # via
     #   commitizen
     #   requests
-click==8.2.1
+click==8.4.2
     # via
     #   black
     #   bump-my-version
@@ -61,25 +61,25 @@ colorama==0.4.6
     #   pylint
     #   pytest
     #   radon
-commitizen==4.8.3
+commitizen==4.17.0
     # via -r requirements-dev.in
-contourpy==1.3.2
+contourpy==1.3.3
     # via matplotlib
-coverage[toml]==7.9.1
+coverage[toml]==7.15.4
     # via pytest-cov
 cycler==0.12.1
     # via matplotlib
 decli==0.6.3
     # via commitizen
-dill==0.4.0
+dill==0.4.1
     # via pylint
-distlib==0.3.9
+distlib==0.4.3
     # via virtualenv
-docutils==0.21.2
+docutils==0.23
     # via readme-renderer
 filelock==3.18.0
     # via virtualenv
-flake8==7.2.0
+flake8==7.3.0
     # via
     #   -r requirements-dev.in
     #   flake8-docstrings
@@ -95,28 +95,28 @@ httpcore==1.0.9
     # via httpx
 httpx==0.28.1
     # via bump-my-version
-id==1.5.0
+id==1.6.1
     # via twine
-identify==2.6.12
+identify==2.6.19
     # via pre-commit
 idna==3.10
     # via
     #   anyio
     #   httpx
     #   requests
-importlib-metadata==8.7.0
+importlib-metadata==8.9.0
     # via commitizen
-iniconfig==2.1.0
+iniconfig==2.3.0
     # via pytest
-isort==6.0.1
+isort==6.1.0
     # via
     #   -r requirements-dev.in
     #   pylint
 jaraco-classes==3.4.0
     # via keyring
-jaraco-context==6.0.1
+jaraco-context==6.1.2
     # via keyring
-jaraco-functools==4.2.1
+jaraco-functools==4.6.0
     # via keyring
 jinja2==3.1.6
     # via
@@ -124,30 +124,30 @@ jinja2==3.1.6
     #   mkdocs
     #   mkdocs-material
     #   pytest-html
-jmespath==1.0.1
+jmespath==1.1.0
     # via
     #   boto3
     #   botocore
-keyring==25.6.0
+keyring==25.7.0
     # via twine
-kiwisolver==1.4.8
+kiwisolver==1.5.0
     # via matplotlib
 loguru==0.7.3
     # via -r D:\git\template_python\requirements.in
-mando==0.7.1
+mando==0.8.2
     # via radon
-markdown==3.8.2
+markdown==3.10.3
     # via
     #   mkdocs
     #   mkdocs-material
     #   pymdown-extensions
 markdown-it-py==3.0.0
     # via rich
-markupsafe==3.0.2
+markupsafe==3.0.3
     # via
     #   jinja2
     #   mkdocs
-matplotlib==3.10.3
+matplotlib==3.11.1
     # via -r D:\git\template_python\requirements.in
 mccabe==0.7.0
     # via
@@ -163,13 +163,13 @@ mkdocs==1.6.1
     # via
     #   -r requirements-dev.in
     #   mkdocs-material
-mkdocs-get-deps==0.2.0
+mkdocs-get-deps==0.2.2
     # via mkdocs
-mkdocs-material==9.6.14
+mkdocs-material==9.7.7
     # via -r requirements-dev.in
 mkdocs-material-extensions==1.3.1
     # via mkdocs-material
-more-itertools==10.7.0
+more-itertools==10.8.0
     # via
     #   jaraco-classes
     #   jaraco-functools
@@ -179,9 +179,9 @@ mypy-extensions==1.1.0
     # via
     #   black
     #   mypy
-nh3==0.2.21
+nh3==0.3.6
     # via readme-renderer
-nodeenv==1.9.1
+nodeenv==1.10.0
     # via pre-commit
 numpy==1.26.4
     # via
@@ -201,7 +201,7 @@ packaging==25.0
     #   twine
 paginate==0.5.7
     # via mkdocs-material
-pandas==2.2.3
+pandas==2.3.3
     # via -r D:\git\template_python\requirements.in
 pathspec==0.12.1
     # via
@@ -209,11 +209,11 @@ pathspec==0.12.1
     #   mkdocs
 pbr==6.1.1
     # via stevedore
-pika==1.3.2
+pika==1.4.4
     # via -r D:\git\template_python\requirements.in
 pillow==11.2.1
     # via matplotlib
-platformdirs==4.3.8
+platformdirs==4.11.2
     # via
     #   black
     #   mkdocs-get-deps
@@ -221,38 +221,38 @@ platformdirs==4.3.8
     #   virtualenv
 pluggy==1.6.0
     # via pytest
-pre-commit==4.2.0
+pre-commit==4.6.2
     # via -r requirements-dev.in
-prometheus-client==0.22.1
+prometheus-client==0.26.0
     # via -r D:\git\template_python\requirements.in
-prompt-toolkit==3.0.51
+prompt-toolkit==3.0.53
     # via questionary
 py-cpuinfo==9.0.0
     # via pytest-benchmark
-pycodestyle==2.13.0
+pycodestyle==2.14.0
     # via flake8
-pydantic==2.11.7
+pydantic==2.13.4
     # via
     #   bump-my-version
     #   pydantic-settings
-pydantic-core==2.33.2
+pydantic-core==2.48.0
     # via pydantic
-pydantic-settings==2.10.0
+pydantic-settings==2.15.0
     # via bump-my-version
 pydocstyle==6.3.0
     # via flake8-docstrings
-pyflakes==3.3.2
+pyflakes==3.4.0
     # via flake8
 pygments==2.19.2
     # via
     #   mkdocs-material
     #   readme-renderer
     #   rich
-pylint==3.3.6
+pylint==3.3.9
     # via -r requirements-dev.in
 pymdown-extensions==10.16
     # via mkdocs-material
-pyparsing==3.2.3
+pyparsing==3.3.2
     # via matplotlib
 pyproject-hooks==1.2.0
     # via build
@@ -264,15 +264,15 @@ pytest==8.3.5
     #   pytest-html
     #   pytest-metadata
     #   pytest-mock
-pytest-benchmark==5.1.0
+pytest-benchmark==5.2.3
     # via -r requirements-dev.in
-pytest-cov==6.1.1
+pytest-cov==6.3.0
     # via -r requirements-dev.in
-pytest-html==4.1.1
+pytest-html==4.2.0
     # via -r requirements-dev.in
 pytest-metadata==3.1.1
     # via pytest-html
-pytest-mock==3.14.0
+pytest-mock==3.15.1
     # via -r requirements-dev.in
 python-dateutil==2.9.0.post0
     # via
@@ -288,7 +288,7 @@ pytz==2025.2
     # via pandas
 pywin32-ctypes==0.2.3
     # via keyring
-pyyaml==6.0.2
+pyyaml==6.0.3
     # via
     #   bandit
     #   commitizen
@@ -300,7 +300,7 @@ pyyaml==6.0.2
     #   xenon
 pyyaml-env-tag==1.1
     # via mkdocs
-questionary==2.1.0
+questionary==2.1.1
     # via
     #   bump-my-version
     #   commitizen
@@ -320,19 +320,19 @@ requests-toolbelt==1.0.0
     # via twine
 rfc3986==2.0.0
     # via twine
-rich==14.0.0
+rich==14.3.4
     # via
     #   bandit
     #   bump-my-version
     #   rich-click
     #   twine
-rich-click==1.8.9
+rich-click==1.9.8
     # via bump-my-version
-ruff==0.11.6
+ruff==0.16.2
     # via -r requirements-dev.in
-s3transfer==0.13.0
+s3transfer==0.19.2
     # via boto3
-scipy==1.15.3
+scipy==1.18.0
     # via -r D:\git\template_python\requirements.in
 six==1.17.0
     # via
@@ -340,28 +340,28 @@ six==1.17.0
     #   python-dateutil
 sniffio==1.3.1
     # via anyio
-snowballstemmer==3.0.1
+snowballstemmer==3.1.1
     # via pydocstyle
-stevedore==5.4.1
+stevedore==5.9.0
     # via bandit
-termcolor==2.3.0
+termcolor==2.5.0
     # via
     #   -r requirements-dev.in
     #   commitizen
-tomlkit==0.13.3
+tomlkit==0.15.1
     # via
     #   bump-my-version
     #   commitizen
     #   pylint
-twine==6.1.0
+twine==6.2.0
     # via -r requirements-dev.in
-types-python-dateutil==2.9.0.20241206
+types-python-dateutil==2.9.0.20260807
     # via -r requirements-dev.in
-types-pyyaml==6.0.12.20250402
+types-pyyaml==6.0.12.20260724
     # via -r requirements-dev.in
-types-requests==2.32.0.20250328
+types-requests==2.33.0.20260712
     # via -r requirements-dev.in
-typing-extensions==4.14.0
+typing-extensions==4.16.0
     # via
     #   anyio
     #   mypy
@@ -369,11 +369,11 @@ typing-extensions==4.14.0
     #   pydantic-core
     #   rich-click
     #   typing-inspection
-typing-inspection==0.4.1
+typing-inspection==0.4.3
     # via
     #   pydantic
     #   pydantic-settings
-tzdata==2025.2
+tzdata==2025.3
     # via pandas
 urllib3==2.5.0
     # via
@@ -386,15 +386,15 @@ virtualenv==20.31.2
     # via pre-commit
 watchdog==6.0.0
     # via mkdocs
-wcmatch==10.0
+wcmatch==10.2.1
     # via bump-my-version
-wcwidth==0.2.13
+wcwidth==0.8.2
     # via prompt-toolkit
 win32-setctime==1.2.0
     # via loguru
 xenon==0.9.3
     # via -r requirements-dev.in
-zipp==3.23.0
+zipp==3.23.1
     # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
