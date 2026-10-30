@@ -248,7 +248,7 @@ pygments==2.19.2
     #   mkdocs-material
     #   readme-renderer
     #   rich
-pylint==3.3.6
+pylint==4.0.9
     # via -r requirements-dev.in
 pymdown-extensions==10.16
     # via mkdocs-material
